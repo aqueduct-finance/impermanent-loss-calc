@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import ethPriceData from '../data/ethPriceData.json';
+import uniV3EthPriceDataDaily from '../data/uniV3EthPriceDataDaily.json';
+import uniV2EthPriceDataDaily from '../data/uniV2EthPriceDataDaily.json';
+import uniV3EthPriceDataHourly from '../data/uniV3EthPriceDataHourly.json';
 
 export default function Home() {
 
@@ -7,9 +10,9 @@ export default function Home() {
   const [aqIL, setAqIL] = useState('-');
 
   useEffect(() => {
-    const data = ethPriceData;
+    const data = uniV2EthPriceDataDaily;
     const lpFlowA = 1;
-    const lpFlowB = 135.44;
+    const lpFlowB = 201.49; //3521.21; //135.44;
     //const initialRebalanceIndex = Math.floor(data.length / 4);
 
     // calculate LP value
