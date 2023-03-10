@@ -10,33 +10,24 @@ export default function Home() {
   const [aqIL, setAqIL] = useState('-');
 
   useEffect(() => {
+    /* MODIFY THESE TO TEST OTHER DATA: */
     const data = uniV2EthPriceDataDaily;
     const lpFlowA = 1;
-    const lpFlowB = 201.49; //3521.21; //135.44;
-    //const initialRebalanceIndex = Math.floor(data.length / 4);
+    const lpFlowB = 201.49;
+    /* -------------------------------- */
 
+    // NOTE: these calculations assume that an LP has enough balance to maintain the above flowrates over the dataset's timespan
+    
     // calculate LP value
     var avgPriceA = 0;
     var avgPriceB = 0;
     const lpStartTimestamp = data.at(0)!.timestamp - 1;
     var timestampLast = lpStartTimestamp;
-    // TODO: add rebalance logic:
-    //var totalAvgPriceA = 0;
-    //var totalAvgPriceB = 0;
-    //var rebalanceIndex = initialRebalanceIndex;
     data.forEach((d, i) => {
       avgPriceA += d.price * (d.timestamp - timestampLast);
       avgPriceB += (1 / d.price) * (d.timestamp - timestampLast);
       timestampLast = d.timestamp;
-
-      // TODO: add rebalance logic:
-      // if needed, rebalance LP position
-      /*if (i == rebalanceIndex) {
-        rebalanceIndex += initialRebalanceIndex;
-        totalAvgPriceA = 
-      }*/
     });
-
     const lpValue = (lpFlowA * avgPriceA) + (lpFlowB * avgPriceB * data.at(-1)!.price)
 
     // calculate held value
